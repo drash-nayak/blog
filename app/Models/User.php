@@ -20,8 +20,21 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'username',
         'password',
     ];
+
+    // accessor
+    public function getUsernameAttribute($username): string
+    {
+       return $this->attributes['username'] = ucwords($username);
+    }
+
+    //mutator
+    public function setPasswordAttribute($password): string
+    {
+        return $this->attributes['password'] = bcrypt($password);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
