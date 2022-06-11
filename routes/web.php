@@ -5,7 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\PostCommentsController;
-
+use App\Http\Controllers\NewsletterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,22 +17,7 @@ use App\Http\Controllers\PostCommentsController;
 |
 */
 
-Route::get('ping', function () {
-
-    $mailchimp = new MailchimpMarketing\ApiClient();
-
-    $mailchimp->setConfig([
-        'apiKey' => config('services.mailchimp.key'),
-        'server' => 'us14'
-    ]);
-
-    $response = $mailchimp->lists->addListMember('9cda9292ce',[
-        'email_address' => 'drashtant391993@gmail.com',
-        'status' => 'subscribed'
-    ]);
-
-    ddd($response);
-});
+Route::post('newsletter', NewsletterController::class);
 
 
 Route::get('/', [PostController::class, 'index'])->name('home');
