@@ -13,7 +13,9 @@ class PostController extends Controller
          logger($query->sql,$query->bindings);
      });*/
         return view('posts.index', [
-            'posts' => Post::latest()->filter(request(['search','category','author']))->paginate(6),
+            'posts' => Post::latest()->filter(request(['search','category','author']))
+                ->paginate(6)->withQueryString()
+            //->simplePaginate(6),
         ]);
     }
 
