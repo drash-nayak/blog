@@ -55,7 +55,7 @@ class Post extends Model
         OR
         Post::without(['author','user'])->first() or ....
     */
-    protected $with = ['category','author'];
+    protected $with = ['category','author','comments'];
 /*    public function getRouteKeyName()
     {
         return 'slug';
@@ -70,7 +70,7 @@ class Post extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class)->orderBy('created_at','desc');
     }
 
     public function author(){

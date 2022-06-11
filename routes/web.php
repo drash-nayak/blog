@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\PostCommentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,4 +27,5 @@ Route::group(['middleware'=>'guest'],function (){
 
 Route::group(['middleware'=>'auth'],function () {
     Route::post('logout', [SessionsController::class, 'destroy']);
+    Route::post('posts/{post:slug}/comments',[PostCommentsController::class,'store']);
 });
