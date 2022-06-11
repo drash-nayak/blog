@@ -20,5 +20,10 @@ Route::get('posts/{post:slug}', [PostController::class,'show']);
 Route::group(['middleware'=>'guest'],function (){
     Route::get('/register',[RegisterController::class,'create']);
     Route::post('/register',[RegisterController::class,'store']);
+    Route::get('/login',[SessionsController::class,'create']);
+    Route::post('/login',[SessionsController::class,'store']);
 });
-Route::post('logout',[SessionsController::class,'destroy']);
+
+Route::group(['middleware'=>'auth'],function () {
+    Route::post('logout', [SessionsController::class, 'destroy']);
+});
