@@ -13,7 +13,7 @@ class PostController extends Controller
          logger($query->sql,$query->bindings);
      });*/
         return view('posts.index', [
-            'posts' => Post::latest()->filter(request()->only('search','category'))->get(),
+            'posts' => Post::latest()->filter(request(['search','category','author']))->get(),
         ]);
     }
 
